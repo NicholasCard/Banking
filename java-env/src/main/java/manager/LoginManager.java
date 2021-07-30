@@ -20,6 +20,7 @@ public class LoginManager {
 
 	public User checkCredentialsUser(String user_name, String password) {
 		
+		
 		return loginDao.checkCredentialsUser(user_name, password);
 	}
 }

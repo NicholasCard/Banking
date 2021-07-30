@@ -15,88 +15,108 @@ public class ConsoleApp {
 	
 	private LoginManager loginManager = new LoginManager();
 	
+	User currentUser = new User();
 	
-	//attempting to make the user global but hoenslty making it global could be a secruity issue
+	
+	Scanner input = new Scanner(System.in);
+	
+	//attempting to make the user global but honestly making it global could be a security issue
 	//User globalUser = new User();
 	 
+	
 	public void start() {
+		
 		
 		showLogin();
 		System.out.println("Enter Action: ");
+	
+		currentUser = login();
 		
-		login();
+		checkRole();
+		
+		/*
+		if (checkRole().equals("customer")) {
+			showCustomerAccount();
+		} else if (checkRole().equals("employee")) {
+			showEmployeeAccount();
+		} else {
+			System.out.println("something went wrong in the start logic");
+		}
+			
+		*/
+		
+		input.close();
+		
 		
 	}
 	
 		private void showLogin() {
-	
-		
 		System.out.println("1. LogIn/Register");
 		//have to ask for a register option but i want the user to be able to go through everything they need
 		}
 		
 		
-		private void login() {
+		
+		private User login() {
+			//User currentUser = new User();
 			
 			System.out.println("Enter your login information starting with username: ");
-			Scanner input = new Scanner(System.in);
 			String user_name = input.next();
 			System.out.println("Next your password: ");
 			String password = input.next();
 			
+			
 			User currentUser = loginManager.checkCredentialsUser(user_name, password);
 			
+			
+			
+			return currentUser;
+			
+		}
+		
+		
+		private void checkRole() {
+			//String role = null;
+			
+			//System.out.println(currentUser.getRole());
 			if ((currentUser != null) & (currentUser.getRole().equals("customer"))) {
 				System.out.println("you are a customer welcome!");
 				
-				
-				//this if statement is not then running showCustomerAcc for some reason
-				
 				System.out.println("this is printing the currentUser within the login function: " + currentUser.getF_name());
+				//role = "customer";
+				showCustomerAccount();
 				
 				
-				//why is it just stopping here
-				
-				showCustomerAccount(currentUser);
-				
-				//need to figure out how to pass around the current user 
-				//i might just have to do it like this or instantiate it in the main method instead of here but 
-				//not sure yet
-				
+
 				
 				
 			} else if ((currentUser != null) && (currentUser.getRole().equals("employee"))){
 				System.out.println("You are an employee");
-				showEmployeeAccount(currentUser);
+				
+				//role = "employee";
+				
 			
-			//need to make this break with the scanner to go to a retry or an exit menu
 		} else {
 			System.out.println("you are neither of these and thats a problem");
 		}
+			//return role;
 			
-			input.close();
-			
-		}
+	}
 	
 	
 	
-		private void showCustomerAccount(User currentUser) {
+		private void showCustomerAccount() {
 			
 			
+			//needs to be a function in here that displays all the user accounts 
 			
-			
-			System.out.println("Welcome to your account! " + currentUser.getF_name());
+			System.out.println("Welcome! " + currentUser.getF_name());
 			System.out.println("Please select an option");
 			System.out.println("1. Select an Account");
 			
 			System.out.println("2. Log Out");
 			
-			Scanner input = new Scanner(System.in);
 			String userInput = input.next();
-			
-			//also needs a back button but I do need to make the scanner a bit easier to use and read instead of making a new
-			//one every time
-			//research making the loops 
 			
 			
 			switch (userInput) {
@@ -116,13 +136,12 @@ public class ConsoleApp {
 				break;
 			}
 			
+			input.close();
 		}
 
 	private void customerMenu(User currentUser) {
+	
 		
-		//this has to go somewhere and i might make another class just for all of these functions
-		//because this is getting sort of ridiculous
-		Scanner input = new Scanner(System.in);
 		String userInput = input.next();
 		
 		System.out.println("1. View Balance");
@@ -150,55 +169,41 @@ public class ConsoleApp {
 		
 		case "4":
 			System.out.println("You went back to the previous menu ");
-			showCustomerAccount(currentUser);
+			//showCustomerAccount(currentUser);
 		default:
 			break;
 		}
 		
 	}
 	
-	private void showEmployeeAccount(User currentUser) {
+	private void showEmployeeAccount() {
+		
+		//needs to be changed to be employee specific but for now its fine
 		System.out.println("Welcome to your account! " + currentUser.getF_name());
 		System.out.println("Please select an option");
 		System.out.println("1. Select an Account");
 		
 		System.out.println("2. Log Out");
 		
-		
-		
-		Scanner input = new Scanner(System.in);
+		//Scanner input = new Scanner(System.in);
 		String userInput = input.next();
-		
-		
-		
-		
-		//also needs a back button but I do need to make the scanner a bit easier to use and read instead of making a new
-		//one every time
-		//research making the loops 
-		
 		
 		switch (userInput) {
 		case "1":
 			
 			System.out.println("you are selecting an account");
-			//selectAccount() function i have to make
-			//then once an account is made thats when the customer menu pops up 
+			
 			customerMenu(currentUser);
 			
 			break;
 		case "2":
-			//make a logout function thats made anytime someone selects log out.
+			
 			System.out.println("you have selected log out");
 			
 		default:
 			break;
 		}
-		
-		
 	}
-	
-	
-	
 	
 	
 	
