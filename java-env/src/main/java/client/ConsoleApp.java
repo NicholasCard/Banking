@@ -3,12 +3,18 @@ package client;
 import java.util.List;
 import java.util.Scanner;
 
+
 import common.pojo.User;
+
+import manager.LoginManager;
 import manager.UserManager;
 
 public class ConsoleApp {
 
+	//might be a way to combine these but for now just make a new manager
 	private UserManager manager = new UserManager();
+	
+	private LoginManager loginManager = new LoginManager();
 	
 	 
 	public void start() {
@@ -16,11 +22,12 @@ public class ConsoleApp {
 		showLogin();
 		System.out.println("Enter Action: ");
 		Scanner input = new Scanner(System.in);
-		String choice = input.next();
+		String userInput = input.next();
 		
-		switch (choice) {
+		switch (userInput) {
 		case "1":
-			listView();
+			//listView();
+			login();
 			break;
 		default:
 			break;
@@ -75,14 +82,60 @@ public class ConsoleApp {
 		
 	}
 	
-	private void Login() {
+	private void showUserAccount() {
 		
-		//this needs to relate to the loginCheck with the UserManager 
-		//User needs to be able to input a username and password 
-		//A Credentials object needs to be made with the username and password and that 
-		//will be used to check the database if that user and password exist
+		//should honestly just ask for the credentials right away
+		Scanner input = new Scanner(System.in);
+		String userInput = input.next();
+		
+		System.out.println("Welcome to your account! ");
+		System.out.println("Please select an option");
+		System.out.println("1. Select an Account");
+		System.out.println("2. Log Out");
 		
 		
+		//also needs a back button but I do need to make the scanner a bit easier to use and read instead of making a new
+		//one every time
+		//research making the loops 
+		
+		//also need a function that creates the user info that is logged in
+		
+		switch (userInput) {
+		case "1":
+			//selectAccount() function i have to make
+			System.out.println("you are selecting an account");
+			break;
+		case "2":
+			//make a logout function thats made anytime someone selects log out.
+			System.out.println("you have selected log out");
+		default:
+			break;
+		}
+		
+	}
+	
+	private void login() {
+		
+		System.out.println("Enter your login information starting with username: ");
+		Scanner input = new Scanner(System.in);
+		String user_name = input.next();
+		System.out.println("Next your password: ");
+		String password = input.next();
+		
+		User currentUser = loginManager.checkCredentialsUser(user_name, password);
+		
+		if (currentUser != null) {
+			System.out.println();
+			System.out.println(currentUser.getF_name());
+			showUserAccount();
+		} else {
+		System.out.println("you need to try again");
+		//need to make this break with the scanner to go to a retry or an exit menu
+	}
+		
+	
+
+		input.close();
 	}
 	
 	private void listView() {

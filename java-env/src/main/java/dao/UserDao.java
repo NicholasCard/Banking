@@ -27,18 +27,26 @@ public class UserDao {
 				while(rs.next()) {
 					
 					//i really like this notation makes it easy to understand for my json brain
-					users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4)));
+					users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 				}
 				
 			} catch (SQLException ex) {
 				ex.printStackTrace();
-			}
+			} 
 			
 			return users;
 	 		
 		}
 		
-		public List<User> findAll(String f_name) {
+		public User grabUser(String user_name, String password) {
+			
+			//this function has to be able to grab all the needed user information for the user object form the password and the 
+			//username
+			
+			//need to have a function run inside of the loginDoa and loginManager in some way so that things dont get crazy
+			//easier to seperate
+			//maybe i can just grab the info already from the select statement im making. I dont need to really have a credentials object
+			//because it should just do it all in one place and only once i dont need to keep track of it. 
 			return null;
 		}
 		

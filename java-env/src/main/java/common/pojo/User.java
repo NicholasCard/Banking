@@ -3,6 +3,7 @@ package common.pojo;
 public class User {
 
 	private int id;
+	private String user_name;
 	private String f_name;
 	private String l_name;
 	private String role;
@@ -18,9 +19,10 @@ public class User {
 	}
 		
 		
-	public User(int id, String f_name, String l_name, String role) {
+	public User(int id, String user_name, String f_name, String l_name, String role) {
 		super();
 		this.id = id;
+		this.user_name = user_name;
 		this.f_name = f_name;
 		this.l_name = l_name;
 		this.role = role;
@@ -49,6 +51,14 @@ public class User {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public String getUser_name() {
+		return user_name;
+	}
+
+	public void setUser_name(String user_name) {
+		this.user_name = user_name;
 	}
 	
 }
