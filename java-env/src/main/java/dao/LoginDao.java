@@ -32,17 +32,6 @@ public class LoginDao {
 			
 			
 			while (rs.next()) {
-			/*this can be a method but for right now i have to chill
-			authorizedUser.setId(rs.getInt(1));
-			authorizedUser.setUser_name(rs.getString(2));
-			authorizedUser.setF_name(rs.getString(3));
-			authorizedUser.setL_name(rs.getString(4));
-			authorizedUser.setRole(rs.getString(5));
-			*/
-				
-				//might have to caste here 
-				//issue is that this makes a list of users i just need a list of all the info 
-				
 				users.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
 				authorizedUser = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
 		}

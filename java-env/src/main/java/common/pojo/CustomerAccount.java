@@ -3,7 +3,7 @@ package common.pojo;
 public class CustomerAccount {
 
 	private int id;
-	private double total;
+	private int total;
 	private String acc_name;
 	
 		
@@ -18,7 +18,7 @@ public class CustomerAccount {
 	}
 		
 		
-	public CustomerAccount(int id, String acc_name, Double total) {
+	public CustomerAccount(int id, String acc_name, int total) {
 		super();
 		this.setId(id);
 		this.setAcc_name(acc_name);
@@ -38,7 +38,7 @@ public class CustomerAccount {
 		return total;
 	}
 
-	public void setTotal(double total) {
+	public void setTotal(int total) {
 		this.total = total;
 	}
 
