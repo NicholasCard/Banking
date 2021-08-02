@@ -27,4 +27,7 @@ public class LoginManager {
 	public void registerUser(String f_name, String l_name, String user_name, String password) {
 		registerDao.registerUser(f_name, l_name, user_name, password);
 	}
+	
+	
+	
 }

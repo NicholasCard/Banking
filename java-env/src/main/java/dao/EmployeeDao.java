@@ -69,4 +69,21 @@ public class EmployeeDao {
 			return ca;
 	}
 	
+	public void approved(int id) {
+		
+		try {
+			Connection conn = DatabaseUtil.getInstance().getConnection();
+			//make a better query statement
+			PreparedStatement pstmt = conn.prepareStatement("UPDATE bank.accounts SET approved = 'true' WHERE id = ?;");
+		
+			pstmt.setInt(1, id);
+			
+		
+			pstmt.executeUpdate();
+		
+		} catch (SQLException ex) {
+		ex.printStackTrace();
+		}
+	}
+	
 }

@@ -244,9 +244,7 @@ public List<Transaction> accTransactions(int user_id, int acc_id) {
 			deletePstmt.setInt(1, acc_id);
 			deletePstmt.setInt(2, user_id);
 			
-			
 			deletePstmt.executeUpdate();
-			
 			
 			
 		} catch (SQLException ex) {

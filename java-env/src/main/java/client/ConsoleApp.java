@@ -196,6 +196,10 @@ CustomerAccount customerAcc = new CustomerAccount();
 			
 			
 			System.out.println("please select an account to delete by routing number");
+			
+			
+			//need to fix this because i want it to stay in transactions but thats tricky because of the foreign key constraint
+			System.out.println("BE WARNED THIS WILL DELETE ANY OTHER TRANSACTIONS INVOLVONG THIS ACCOUNT");
 			System.out.println("|  Routing Number  |  Account Name  |  Balance  |");
 			
 			//data
@@ -410,8 +414,8 @@ CustomerAccount customerAcc = new CustomerAccount();
 		System.out.println("Welcome to your account! " + currentUser.getF_name());
 		System.out.println("Please select an option");
 		System.out.println("1. See all Transactions");
-		
-		System.out.println("2. Log Out");
+		System.out.println("2. Approve Accounts");
+		System.out.println("3. Log Out");
 		
 		//Scanner input = new Scanner(System.in);
 		String userInput = input.next();
@@ -423,6 +427,11 @@ CustomerAccount customerAcc = new CustomerAccount();
 			break;
 			
 		case "2":
+			System.out.println("Approve accounts");
+			approveAccounts();
+			break;
+			
+		case "3":
 			System.out.println("you have selected log out");
 			
 		default:
@@ -446,5 +455,41 @@ CustomerAccount customerAcc = new CustomerAccount();
 		}
 		
 	}
+	
+private void approveAccounts() {
+		
+		List<CustomerAccount> aa = em.approveAccounts();
+		
+		//could add more filter options for the employee side but this is all the user side I need
+		System.out.println("Here are all of the transactions");
+		System.out.println("|  AccountNumber  |  Account Name  |  Amount  |  Transaction Type  |");
+		
+		//data
+		
+		for (CustomerAccount a : aa) {
+			System.out.println(a.getId() + " | " + a.getAcc_name() + " | " + a.getTotal() +" | " + a.getF_name() + " " +  a.getL_name());
+		}
+		
+		int userInput = input.nextInt();
+		
+		//could make it so i just have to instantiate that account object and then once its not selected anymore it 
+		//deletes or overrides the other account object
+		int accountId = userInput;
+		
+		for (CustomerAccount a : aa) {
+		    if (a.getId() == (accountId)) {
+		        
+		        System.out.println("You have selected " + a.getAcc_name() + " to be approved");
+		        em.approved(accountId);
+		        
+		        break;
+		    } else {
+		    	System.out.println("You selected an account that doesnt exist");
+		    	approveAccounts();
+		    }
+		}
+	}
+
+	
 
 }
